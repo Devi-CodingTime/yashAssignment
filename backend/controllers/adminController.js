@@ -75,35 +75,36 @@ const login = async(req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
-module.exports.login = login;
 
-//  const signup = async(req, res) => {
-//     try {
-//         const { name, email, password } = req.body;
+ const signup = async(req, res) => {
+    try {
+        const { name, email, password } = req.body;
 
-//         const user = await adminModal.findOne({ email:email });
-//         if (user) {
-//             return res.status(400).json({ message: "User already exists" });
-//         }
-//         const hashPassword = await bcryptjs.hash(password, 10);
-//         const createdUser = new adminModal({
-//             name: name,
-//             email: email,
-//             password: hashPassword,
-//         });
-//         await createdUser.save();
-//         res.status(201).json({
-//             message: "User created successfully",
-//             user: {
-//                 _id: createdUser._id,
-//                 name: createdUser.name,
-//                 email: createdUser.email,
-//             },
-//         });
-//     } catch (error) {
-//         console.log("Error: " + error.message);
-//         res.status(500).json({ message: "Internal server error" });
-//     }
-// };
+        const user = await adminModal.findOne({ email:email });
+        if (user) {
+            return res.status(400).json({ message: "User already exists" });
+        }
+        const hashPassword = await bcryptjs.hash(password, 10);
+        const createdUser = new adminModal({
+            name: name,
+            email: email,
+            password: hashPassword,
+        });
+        await createdUser.save();
+        res.status(201).json({
+            message: "Admin registered successfully",
+            user: {
+                _id: createdUser._id,
+                name: createdUser.name,
+                email: createdUser.email,
+            },
+        });
+    } catch (error) {
+        console.log("Error: " + error.message);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
 
-// module.exports.signup = signup;
+
+// module.exports.login = login;
+module.exports = {login,signup};

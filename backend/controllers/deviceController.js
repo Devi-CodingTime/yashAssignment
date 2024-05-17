@@ -35,7 +35,7 @@ const getDevice = async(req,res) => {
 }
 const singleDevice =  async (req, res) => {
     try {
-        const user = await userModal.findById(req.params.id);
+        const user = await deviceModal.findById(req.params.id);
         if (!user) {
             return res.status(404).send();
         }
